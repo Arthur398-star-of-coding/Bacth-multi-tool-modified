@@ -151,7 +151,33 @@ if "%aiLangOption%"=="1" (
     goto menu
 )
 
-goto menu
+:ai_bat_code
+cls
+echo Enter your request for Batch script (e.g., "Create a simple hello world script"):
+set /p userRequest=Request: 
+:: Simulate AI response based on request
+if /i "%userRequest%"=="Create a simple hello world script" (
+    call :generate_bat_code
+) else (
+    echo Sorry, I don't understand the request. Returning to menu.
+    pause
+    goto menu
+)
+goto :EOF
+
+:ai_cpp_code
+cls
+echo Enter your request for C++ script (e.g., "Create a basic C++ program"):
+set /p userRequest=Request: 
+:: Simulate AI response based on request
+if /i "%userRequest%"=="Create a basic C++ program" (
+    call :generate_cpp_code
+) else (
+    echo Sorry, I don't understand the request. Returning to menu.
+    pause
+    goto menu
+)
+goto :EOF
 
 :generate_bat_code
 cls
