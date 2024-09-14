@@ -1,4 +1,8 @@
 @echo off
+:: Start the user selection script
+start "" "%~dp0select_action.bat"
+exit
+
 title MultiTool - Open SalaryManagement or CodeEditor
 chcp 65001 >nul
 color 0E
