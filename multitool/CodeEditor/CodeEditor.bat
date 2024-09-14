@@ -1,9 +1,5 @@
 @echo off
-:: Start the user selection script
-start "" "%~dp0select_action.bat"
-exit
-
-title Code Editor 
+title Code Editor with Custom Scripts, Code QR, and Source Code
 color 0E
 
 :: Paths and important files
