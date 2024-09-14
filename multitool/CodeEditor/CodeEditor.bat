@@ -1,5 +1,5 @@
 @echo off
-title Code Editor with Custom Languages
+title Code Editor with AI Code Generator
 color 0E
 
 :: Paths and important files
@@ -21,14 +21,16 @@ echo ========================================
 echo 1. Write and Run Script
 echo 2. View Scripts
 echo 3. Define Custom Language
-echo 4. Exit
+echo 4. AI Code Generator
+echo 5. Exit
 echo ========================================
-set /p option=Choose an option (1, 2, 3, 4): 
+set /p option=Choose an option (1, 2, 3, 4, 5): 
 
 if "%option%"=="1" goto write_script
 if "%option%"=="2" goto view_scripts
 if "%option%"=="3" goto define_custom_language
-if "%option%"=="4" goto exit
+if "%option%"=="4" goto ai_code_generator
+if "%option%"=="5" goto exit
 
 goto menu
 
@@ -126,6 +128,56 @@ echo Custom language extension set to %customExt%.
 echo %customExt% > "%customLangFile%"
 pause
 goto menu
+
+:ai_code_generator
+cls
+echo AI Code Generator
+echo -----------------------
+echo Select language for AI code generation:
+echo 1. Batch (.bat)
+echo 2. C++ (.cpp)
+echo 3. Exit
+set /p aiLangOption=Choose a language (1, 2, 3): 
+
+if "%aiLangOption%"=="3" goto menu
+
+if "%aiLangOption%"=="1" (
+    call :generate_bat_code
+) else if "%aiLangOption%"=="2" (
+    call :generate_cpp_code
+) else (
+    echo Invalid selection. Returning to menu.
+    pause
+    goto menu
+)
+
+goto menu
+
+:generate_bat_code
+cls
+echo Generating Batch (.bat) code...
+set "codeFile=%scriptDir%\ai_generated_script.bat"
+echo @echo off > "%codeFile%"
+echo title Generated Batch Script >> "%codeFile%"
+echo echo Hello, this is a generated batch script. >> "%codeFile%"
+echo pause >> "%codeFile%"
+echo Batch code generated successfully as ai_generated_script.bat.
+pause
+goto :EOF
+
+:generate_cpp_code
+cls
+echo Generating C++ (.cpp) code...
+set "codeFile=%scriptDir%\ai_generated_script.cpp"
+echo #include <iostream> > "%codeFile%"
+echo using namespace std; >> "%codeFile%"
+echo int main() { >> "%codeFile%"
+echo     cout << "Hello, this is a generated C++ script." << endl; >> "%codeFile%"
+echo     return 0; >> "%codeFile%"
+echo } >> "%codeFile%"
+echo C++ code generated successfully as ai_generated_script.cpp.
+pause
+goto :EOF
 
 :exit
 cls
