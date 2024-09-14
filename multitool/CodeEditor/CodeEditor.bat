@@ -1,5 +1,5 @@
 @echo off
-title Code Editor
+title Code Editor with Custom Languages
 color 0E
 
 :: Paths and important files
@@ -40,7 +40,10 @@ echo Select language:
 echo 1. Batch (.bat)
 echo 2. C++ (.cpp)
 echo 3. Custom Language
-set /p langOption=Choose a language (1, 2, 3): 
+echo 4. Exit
+set /p langOption=Choose a language (1, 2, 3, 4): 
+
+if "%langOption%"=="4" goto exit
 
 if "%langOption%"=="1" (
     set "ext=.bat"
@@ -60,17 +63,20 @@ if "%langOption%"=="1" (
     goto menu
 )
 
-set /p scriptName=Enter script name (without extension, type 2 to return): 
+set /p scriptName=Enter script name (without extension, type 2 to return, or 4 to exit): 
 if "%scriptName%"=="2" goto menu
+if "%scriptName%"=="4" goto exit
+
 set "currentFile=%scriptDir%\%scriptName%%ext%"
 echo Writing to %currentFile%...
-echo Type your code below. When done, type 'save' to save the file, or type 'run' to run the code.
+echo Type your code below. When done, type 'save' to save the file, type 'run' to run the code, or type 'exit' to exit.
 
 :: Capture user input for the script
 :input_loop
 set /p codeLine=:
 if "%codeLine%"=="save" goto save_script
 if "%codeLine%"=="run" goto run_script
+if "%codeLine%"=="exit" goto exit
 echo %codeLine% >> "%currentFile%"
 goto input_loop
 
