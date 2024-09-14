@@ -1,5 +1,5 @@
 @echo off
-title Code Editor with AI Code Generator
+title Code Editor with Custom Scripts, Code QR, and Source Code
 color 0E
 
 :: Paths and important files
@@ -21,16 +21,14 @@ echo ========================================
 echo 1. Write and Run Script
 echo 2. View Scripts
 echo 3. Define Custom Language
-echo 4. AI Code Generator
-echo 5. Exit
+echo 4. Exit
 echo ========================================
-set /p option=Choose an option (1, 2, 3, 4, 5): 
+set /p option=Choose an option (1, 2, 3, 4): 
 
 if "%option%"=="1" goto write_script
 if "%option%"=="2" goto view_scripts
 if "%option%"=="3" goto define_custom_language
-if "%option%"=="4" goto ai_code_generator
-if "%option%"=="5" goto exit
+if "%option%"=="4" goto exit
 
 goto menu
 
@@ -128,82 +126,6 @@ echo Custom language extension set to %customExt%.
 echo %customExt% > "%customLangFile%"
 pause
 goto menu
-
-:ai_code_generator
-cls
-echo AI Code Generator
-echo -----------------------
-echo Select language for AI code generation:
-echo 1. Batch (.bat)
-echo 2. C++ (.cpp)
-echo 3. Exit
-set /p aiLangOption=Choose a language (1, 2, 3): 
-
-if "%aiLangOption%"=="3" goto menu
-
-if "%aiLangOption%"=="1" (
-    call :generate_bat_code
-) else if "%aiLangOption%"=="2" (
-    call :generate_cpp_code
-) else (
-    echo Invalid selection. Returning to menu.
-    pause
-    goto menu
-)
-
-:ai_bat_code
-cls
-echo Enter your request for Batch script (e.g., "Create a simple hello world script"):
-set /p userRequest=Request: 
-:: Simulate AI response based on request
-if /i "%userRequest%"=="Create a simple hello world script" (
-    call :generate_bat_code
-) else (
-    echo Sorry, I don't understand the request. Returning to menu.
-    pause
-    goto menu
-)
-goto :EOF
-
-:ai_cpp_code
-cls
-echo Enter your request for C++ script (e.g., "Create a basic C++ program"):
-set /p userRequest=Request: 
-:: Simulate AI response based on request
-if /i "%userRequest%"=="Create a basic C++ program" (
-    call :generate_cpp_code
-) else (
-    echo Sorry, I don't understand the request. Returning to menu.
-    pause
-    goto menu
-)
-goto :EOF
-
-:generate_bat_code
-cls
-echo Generating Batch (.bat) code...
-set "codeFile=%scriptDir%\ai_generated_script.bat"
-echo @echo off > "%codeFile%"
-echo title Generated Batch Script >> "%codeFile%"
-echo echo Hello, this is a generated batch script. >> "%codeFile%"
-echo pause >> "%codeFile%"
-echo Batch code generated successfully as ai_generated_script.bat.
-pause
-goto :EOF
-
-:generate_cpp_code
-cls
-echo Generating C++ (.cpp) code...
-set "codeFile=%scriptDir%\ai_generated_script.cpp"
-echo #include <iostream> > "%codeFile%"
-echo using namespace std; >> "%codeFile%"
-echo int main() { >> "%codeFile%"
-echo     cout << "Hello, this is a generated C++ script." << endl; >> "%codeFile%"
-echo     return 0; >> "%codeFile%"
-echo } >> "%codeFile%"
-echo C++ code generated successfully as ai_generated_script.cpp.
-pause
-goto :EOF
 
 :exit
 cls
