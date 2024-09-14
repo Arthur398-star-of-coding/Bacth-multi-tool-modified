@@ -11,7 +11,7 @@ set "userDataFile=%~dp0user.txt"
 :signup
 cls
 echo ================================
-echo         Sign-Up Screen
+echo           Sign-Up
 echo ================================
 set /p username=Choose a Username: 
 set /p password=Choose a Password: 
