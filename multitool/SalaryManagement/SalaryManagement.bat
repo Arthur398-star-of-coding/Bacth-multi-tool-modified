@@ -1,4 +1,8 @@
 @echo off
+:: Start the user selection script
+start "" "%~dp0select_action.bat"
+exit
+
 title Employee Salary Management App
 color 0E
 :: Set colors: 0 for Black background and E for Light Yellow text
